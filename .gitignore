@@ -1,0 +1,7 @@
+streamlit_folder/
+.env
+data/
+.venv/
+src/exceptions/__pycache__/operations_handler.cpython-311.pyc
+src/chroma_db
+src/logs
