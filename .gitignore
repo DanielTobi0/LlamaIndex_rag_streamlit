@@ -1,10 +1,8 @@
 streamlit_folder/
 .env
-data/
 .venv/
 src/exceptions/__pycache__/operations_handler.cpython-311.pyc
 src/__pycache__/app.cpython-311.pyc
 src/__pycache__/simple.cpython-311.pyc
 src/__pycache__/streamlit_app.cpython-311.pyc
-# src/chroma_db
 src/logs
