@@ -53,6 +53,7 @@ def init_retriever():
     system_logger.info(f'Document created with {len(documents)} chunk(s)')
 
     index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
+    # chat_engine = index.as_chat_engine(verbose=False)
     retriever = VectorIndexRetriever(index=index, similarity_top_k=5)
 
     template = (
