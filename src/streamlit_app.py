@@ -2,16 +2,50 @@ import streamlit as st
 import requests
 from simple import generate, process_query
 from exceptions.operations_handler import system_logger, userops_logger, llmresponse_logger
+import os
+import streamlit as st
+import os
+import time
 
+UPLOAD_DIRECTORY = "../data"
+if not os.path.exists(UPLOAD_DIRECTORY):
+    os.makedirs(UPLOAD_DIRECTORY)
+
+def save_uploaded_file(uploaded_file):
+    if uploaded_file is not None:
+        file_path = os.path.join(UPLOAD_DIRECTORY, uploaded_file.name)
+        with open(file_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+        return True
+    return False
 
 st.title("Local RAG with Groq API")
 
-# file upload functionality - yet to be integrated
-st.sidebar.file_uploader(
-    label='Upload documents',
-    accept_multiple_files=True,
-    key='file_uploader',
+# File upload functionality
+with st.sidebar:
+    uploaded_files = st.sidebar.file_uploader(
+        label='Upload documents',
+        accept_multiple_files=True,
+        key='file_uploader',
+        type=['csv', 'pdf']
     )
+    if uploaded_files:
+        # st.write(f"Number of files uploaded: {len(uploaded_files)}")
+        for uploaded_file in uploaded_files:
+            file_details = {
+                "Filename": uploaded_file.name,
+                "Filetype": uploaded_file.type,
+                "Filesize": uploaded_file.size
+            }
+        if st.sidebar.button("Save All Files"):
+            for uploaded_file in uploaded_files:
+                if save_uploaded_file(uploaded_file):
+                    success = st.sidebar.success(f"File {uploaded_file.name} saved successfully!")
+                    time.sleep(1.5)
+                    success.empty()
+                else:
+                    st.sidebar.error(f"Failed to save the file {uploaded_file.name}.")
+
 
 # Model selection
 model_select = st.sidebar.selectbox(
@@ -58,7 +92,6 @@ if prompt:
         st.session_state.messages.append({"role": "assistant", "content": bot_response})
         llmresponse_logger.info(f'Groq response: {bot_response}')
         st.markdown(bot_response)
-
     else:
         st.error(f"Failed to get a response from the backend. Status code: {response.status_code}")
 

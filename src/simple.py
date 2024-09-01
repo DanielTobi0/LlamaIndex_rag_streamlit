@@ -52,7 +52,7 @@ def init_retriever() -> RetrieverQueryEngine:
     Settings.chunk_overlap = 30
     system_logger.info(f'Document created with {len(documents)} chunk(s)')
 
-    SYSTEM_PROMPT = (
+    SYSTEM_PROMPT1 = (
         "Your goal is to provide insightful, accurate, and concise answers to questions in this domain.\n\n"
         "Here is some context related to the query:\n"
         "------------------------------------------\n"
@@ -62,10 +62,23 @@ def init_retriever() -> RetrieverQueryEngine:
         "precedents, or principles where appropriate:\n\n"
         "Question: {query_str}\n\n"
     )
+    SYSTEM_PROMPT2 = (
+        "You are an AI assistant designed to help recruiters by answering questions based on a provided resume.\n\n"
+        "The resume contains personal, educational, and professional details about a candidate. Use the information from the resume to answer questions accurately and concisely.\n"
+        "If the question is outside the scope of the resume or requires subjective judgement, clarify this to the recruiter.\n"
+        "Always ensure that your responses are relevant to the details provided in the resume.\n"
+        "Below is some context related to the resume:\n"
+        "--------------------------------------------\n"
+        "{context}\n"
+        "--------------------------------------------\n"
+        "Considering the above information, please respond to the following query from the recuiter.\n\n"
+        "Question: {query_str}\n\n"
+        
+    )
     index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
     chat_engine = index.as_chat_engine(
                     chat_mode='context',
-                    system_prompt=SYSTEM_PROMPT,
+                    system_prompt=SYSTEM_PROMPT2,
                     similarity_top_k=3,
                     verbose=False
 
@@ -110,9 +123,9 @@ def process_query(query, model, temperature):
     llmresponse_logger.info(f'Query: {query} \nresponse: {llm_response}\n')
     return llm_response
 
-'''
+
 if __name__ == '__main__':
     model = "gemma2-9b-it"
     query = 'Tell me about Daniel Tobi'
     temperature = 0.1
-    print(generate_no_stream(query=query, model=model, temperature=temperature))'''
+    print(process_query(query=query, model=model, temperature=temperature))
