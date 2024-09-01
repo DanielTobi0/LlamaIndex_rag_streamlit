@@ -90,7 +90,3 @@ if prompt:
         st.markdown(bot_response)
     else:
         st.error(f"Failed to get a response from the backend. Status code: {response.status_code}")
-
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
