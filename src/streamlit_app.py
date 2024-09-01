@@ -1,7 +1,7 @@
 import streamlit as st
+import requests
 from simple import generate, process_query
 from exceptions.operations_handler import system_logger, userops_logger, llmresponse_logger
-import requests
 
 
 st.title("Local RAG with Groq API")
@@ -32,7 +32,6 @@ temperature_select = st.sidebar.slider(
     min_value=0.1, max_value=1.0, step=0.1, value=0.5
 )
 st.session_state.temperature = temperature_select
-
 
 # initialize messages
 if "messages" not in st.session_state:
