@@ -1,44 +1,35 @@
-from pathlib import Path
 import os, time
-from exceptions.operations_handler import system_logger, userops_logger, llmresponse_logger
+from exceptions.operations_handler import system_logger, llmresponse_logger
 import chromadb
 from llama_index.core import (
     SimpleDirectoryReader,
     VectorStoreIndex,
     Settings,
     StorageContext,
-    PromptTemplate,
-    get_response_synthesizer,
-    load_index_from_storage,
 )
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.llms.groq import Groq
-from llama_index.core.llms import ChatMessage
-from llama_index.core.retrievers import VectorIndexRetriever
-from llama_index.core.query_engine import RetrieverQueryEngine
-from llama_index.core.postprocessor import SimilarityPostprocessor
-
-
 
 # LLM settings
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-def init_llm(model:str, temperature:float):
+
+def init_llm(llm_model: str, llm_temperature: float):
     """
-    Initalize LLM and embedding models.
+    Initialize LLM and embedding models.
     Args:
-        model(str): model name
-        temperature(float): model experesiveness
+        llm_model(str): model name
+        llm_temperature(float): model expressiveness
     return:
         None
     """
-    Settings.llm = Groq(model, request_timeout=60.0, api_key=GROQ_API_KEY, temperature=temperature)
+    Settings.llm = Groq(llm_model, request_timeout=60.0, api_key=GROQ_API_KEY, temperature=llm_temperature)
     Settings.embed_model = HuggingFaceEmbedding(model_name='TaylorAI/bge-micro-v2')
     system_logger.info(f'Embedding and LLM model loaded')
 
 
-def init_retriever() -> RetrieverQueryEngine:
+def init_retriever():
     """Embed documents and return a query engine for retrieval."""
     db = chromadb.PersistentClient(path="./chroma_db")
     collection_name = 'quickstart'
@@ -52,16 +43,6 @@ def init_retriever() -> RetrieverQueryEngine:
     Settings.chunk_overlap = 30
     system_logger.info(f'Document created with {len(documents)} chunk(s)')
 
-    SYSTEM_PROMPT1 = (
-        "Your goal is to provide insightful, accurate, and concise answers to questions in this domain.\n\n"
-        "Here is some context related to the query:\n"
-        "------------------------------------------\n"
-        "{context}\n"
-        "------------------------------------------\n"
-        "Considering the above information, please respond to the following inquiry with detailed references to applicable laws, "
-        "precedents, or principles where appropriate:\n\n"
-        "Question: {query_str}\n\n"
-    )
     SYSTEM_PROMPT2 = (
         "You are an AI assistant designed to help recruiters by answering questions based on a provided resume.\n\n"
         "The resume contains personal, educational, and professional details about a candidate. Use the information from the resume to answer questions accurately and concisely.\n"
@@ -71,53 +52,57 @@ def init_retriever() -> RetrieverQueryEngine:
         "--------------------------------------------\n"
         "{context}\n"
         "--------------------------------------------\n"
-        "Considering the above information, please respond to the following query from the recuiter.\n\n"
+        "Considering the above information, please respond to the following query from the recruiter.\n\n"
         "Question: {query_str}\n\n"
-        
+
     )
     index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
     chat_engine = index.as_chat_engine(
-                    chat_mode='context',
-                    system_prompt=SYSTEM_PROMPT2,
-                    similarity_top_k=3,
-                    verbose=False
+        chat_mode='context',
+        system_prompt=SYSTEM_PROMPT2,
+        similarity_top_k=3,
+        verbose=False
 
-                )
+    )
     # https://docs.llamaindex.ai/en/v0.10.17/api_reference/query/query_engines/retriever_query_engine.html
     system_logger.info('Query engine and index created\n\n')
     return chat_engine
 
-def generate_response(query_engine, query:str):
+
+def generate_response(query_engine, user_query: str):
     """
     Generate a response to a query using the query engine.
     Args:
         query_engine: ...
-        query(str): user prompt
+        user_query(str): user prompt
         return response (str): user response
     """
-    response = query_engine.chat(query)
-    llmresponse_logger.info(f'Query: {query} \nresponse: {response}\n')
+    response = query_engine.chat(user_query)
+    llmresponse_logger.info(f'Query: {user_query} \nresponse: {response}\n')
     return response.response
+
 
 models = [
     "llama-3.1-70b-versatile",
     "llama-3.1-8b-instant",
     "mixtral-8x7b-32768",
     "gemma2-9b-it"
-    ]
+]
+
 
 def generate(query, model, temperature):
-    init_llm(model=model, temperature=temperature)
+    init_llm(llm_model=model, llm_temperature=temperature)
     query_engine = init_retriever()
     llm_response = generate_response(query_engine, query)
     llmresponse_logger.info(f'Query: {query} \nresponse: {llm_response}\n')
-    
+
     for word in str(llm_response).split():
         yield word + " "
         time.sleep(0.05)
 
+
 def process_query(query, model, temperature):
-    init_llm(model=model, temperature=temperature)
+    init_llm(llm_model=model, llm_temperature=temperature)
     query_engine = init_retriever()
     llm_response = generate_response(query_engine, query)
     llmresponse_logger.info(f'Query: {query} \nresponse: {llm_response}\n')

@@ -1,15 +1,11 @@
 import streamlit as st
-import requests
-from simple import generate, process_query
-from exceptions.operations_handler import system_logger, userops_logger, llmresponse_logger
-import os
-import streamlit as st
-import os
-import time
+import os, time, requests
+from src.exceptions.operations_handler import userops_logger, llmresponse_logger
 
 UPLOAD_DIRECTORY = "../data"
 if not os.path.exists(UPLOAD_DIRECTORY):
     os.makedirs(UPLOAD_DIRECTORY)
+
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
@@ -18,6 +14,7 @@ def save_uploaded_file(uploaded_file):
             f.write(uploaded_file.getbuffer())
         return True
     return False
+
 
 st.title("Local RAG with Groq API")
 
@@ -30,7 +27,6 @@ with st.sidebar:
         type=['csv', 'pdf']
     )
     if uploaded_files:
-        # st.write(f"Number of files uploaded: {len(uploaded_files)}")
         for uploaded_file in uploaded_files:
             file_details = {
                 "Filename": uploaded_file.name,
@@ -45,7 +41,6 @@ with st.sidebar:
                     success.empty()
                 else:
                     st.sidebar.error(f"Failed to save the file {uploaded_file.name}.")
-
 
 # Model selection
 model_select = st.sidebar.selectbox(
@@ -83,9 +78,10 @@ if prompt:
     st.session_state.messages.append({"role": "user", "content": prompt})
     userops_logger.info(f'User query: {prompt}\n\n')
 
-    backend_url = "http://127.0.0.1:8000/chat"
+    BACKEND_URL = os.getenv("BACKEND_URL")
     with st.spinner("Waiting for response..."):
-        response = requests.post(backend_url, json={"query": prompt, "model": st.session_state.model_name, "temperature": st.session_state.temperature})
+        response = requests.post(BACKEND_URL, json={"query": prompt, "model": st.session_state.model_name,
+                                                    "temperature": st.session_state.temperature})
 
     if response.status_code == 200:
         bot_response = response.json().get("response", "")
