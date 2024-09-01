@@ -38,7 +38,7 @@ def init_llm(model:str, temperature:float):
     system_logger.info(f'Embedding and LLM model loaded')
 
 
-def init_retriever():
+def init_retriever() -> RetrieverQueryEngine:
     """Embed documents and return a query engine for retrieval."""
     db = chromadb.PersistentClient(path="./chroma_db")
     collection_name = 'quickstart'
@@ -52,11 +52,7 @@ def init_retriever():
     Settings.chunk_overlap = 30
     system_logger.info(f'Document created with {len(documents)} chunk(s)')
 
-    index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
-    # chat_engine = index.as_chat_engine(verbose=False)
-    retriever = VectorIndexRetriever(index=index, similarity_top_k=5)
-
-    template = (
+    SYSTEM_PROMPT = (
         "Your goal is to provide insightful, accurate, and concise answers to questions in this domain.\n\n"
         "Here is some context related to the query:\n"
         "------------------------------------------\n"
@@ -66,12 +62,17 @@ def init_retriever():
         "precedents, or principles where appropriate:\n\n"
         "Question: {query_str}\n\n"
     )
+    index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
+    chat_engine = index.as_chat_engine(
+                    chat_mode='context',
+                    system_prompt=SYSTEM_PROMPT,
+                    similarity_top_k=3,
+                    verbose=False
 
+                )
     # https://docs.llamaindex.ai/en/v0.10.17/api_reference/query/query_engines/retriever_query_engine.html
-    query_engine = RetrieverQueryEngine(retriever=retriever) # to add template here
     system_logger.info('Query engine and index created\n\n')
-    return query_engine
-
+    return chat_engine
 
 def generate_response(query_engine, query:str):
     """
@@ -81,12 +82,11 @@ def generate_response(query_engine, query:str):
         query(str): user prompt
         return response (str): user response
     """
-    response = query_engine.query(query)
+    response = query_engine.chat(query)
     llmresponse_logger.info(f'Query: {query} \nresponse: {response}\n')
-    return response
+    return response.response
 
 models = [
-    "llama-3.1-405b-reasoning",
     "llama-3.1-70b-versatile",
     "llama-3.1-8b-instant",
     "mixtral-8x7b-32768",
@@ -103,16 +103,16 @@ def generate(query, model, temperature):
         yield word + " "
         time.sleep(0.05)
 
-def generate_no_stream(query, model, temperature):
+def process_query(query, model, temperature):
     init_llm(model=model, temperature=temperature)
     query_engine = init_retriever()
     llm_response = generate_response(query_engine, query)
     llmresponse_logger.info(f'Query: {query} \nresponse: {llm_response}\n')
-    return llm_response.response
+    return llm_response
 
-
+'''
 if __name__ == '__main__':
     model = "gemma2-9b-it"
-    query = 'Tell me about Emmanuel please'
+    query = 'Tell me about Daniel Tobi'
     temperature = 0.1
-    print(generate_no_stream(query=query, model=model, temperature=temperature))
+    print(generate_no_stream(query=query, model=model, temperature=temperature))'''
