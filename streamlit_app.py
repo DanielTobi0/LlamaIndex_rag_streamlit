@@ -1,15 +1,76 @@
 import streamlit as st
-import os, time, requests
-from src.exceptions.operations_handler import userops_logger, llmresponse_logger
+import os, time, requests, shutil
+from src.exceptions.operations_handler import userops_logger, llmresponse_logger, system_logger
 
-UPLOAD_DIRECTORY = "../data"
-if not os.path.exists(UPLOAD_DIRECTORY):
-    os.makedirs(UPLOAD_DIRECTORY)
+
+def delete_data_folder(folder_path, max_attempts=10, delay=2):
+    """
+    a force attempt to delete chroma db of the previous document(s)
+    Args:
+        folder_path(str): chroma db directory
+        max_attempts(int): number of times to try the deletion
+        deplay(int): time interval to wait.
+    """
+    for attempt in range(max_attempts):
+        if os.path.exists(folder_path):
+            try:
+                # Try to delete the folder
+                shutil.rmtree(folder_path)
+                print(f'Deleted folder on attempt {attempt + 1}')
+                return True
+            except Exception as e:
+                print(f'Attempting to force close file handle:')
+                time.sleep(delay)
+        else:
+            print(f'Folder does not exist: {folder_path}')
+            return True
+    
+    print(f'Failed to delete folder after {max_attempts} attempts')
+    return False
+
+dir = 'C:/Users/HomePC/Desktop/project_law/src/chroma_db'
+
+if 'delete_chroma' not in st.session_state:
+    if os.path.exists(dir):
+        # st.cache
+        delete_data_folder(dir)
+        time.sleep(3)
+    st.session_state.delete_chroma = True
+
+
+# delete content in data dir
+DATA_UPLOAD_DIR = "data"
+def clear_data_folder(folder_path):
+    """
+    clear the contents in data folder
+    Args:
+        folder_path(str): chroma db directory
+    """
+    if os.path.exists(folder_path):
+        for filename in os.listdir(folder_path):
+            file_path = os.path.join(folder_path, filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                system_logger.error(f'Failed to delete {file_path}. Reason: {e}')
+
+
+# clear data in data folder
+if 'data_cleared' not in st.session_state:
+    if not os.path.exists(DATA_UPLOAD_DIR):
+        os.makedirs(DATA_UPLOAD_DIR)
+    else:
+        clear_data_folder(DATA_UPLOAD_DIR)
+    st.session_state.data_cleared = True
+
 
 
 def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
-        file_path = os.path.join(UPLOAD_DIRECTORY, uploaded_file.name)
+        file_path = os.path.join(DATA_UPLOAD_DIR, uploaded_file.name)
         with open(file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
         return True

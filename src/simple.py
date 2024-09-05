@@ -1,5 +1,5 @@
 import os, time
-from exceptions.operations_handler import system_logger, llmresponse_logger
+from exceptions.operations_handler import system_logger, llmresponse_logger, userops_logger
 import chromadb
 from llama_index.core import (
     SimpleDirectoryReader,
@@ -10,6 +10,10 @@ from llama_index.core import (
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.llms.groq import Groq
+import argparse
+from pathlib import Path
+import shutil
+
 
 # LLM settings
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -31,7 +35,8 @@ def init_llm(llm_model: str, llm_temperature: float):
 
 def init_retriever():
     """Embed documents and return a query engine for retrieval."""
-    db = chromadb.PersistentClient(path="./chroma_db")
+    chromadb_path = './chroma_db'
+    db = chromadb.PersistentClient(path=chromadb_path)
     collection_name = 'quickstart'
     chroma_collection = db.get_or_create_collection(collection_name)
 
@@ -43,7 +48,8 @@ def init_retriever():
     Settings.chunk_overlap = 30
     system_logger.info(f'Document created with {len(documents)} chunk(s)')
 
-    SYSTEM_PROMPT2 = (
+    
+    SYSTEM_PROMPT = (
         "You are an AI assistant designed to help recruiters by answering questions based on a provided resume.\n\n"
         "The resume contains personal, educational, and professional details about a candidate. Use the information from the resume to answer questions accurately and concisely.\n"
         "If the question is outside the scope of the resume or requires subjective judgement, clarify this to the recruiter.\n"
@@ -59,7 +65,7 @@ def init_retriever():
     index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
     chat_engine = index.as_chat_engine(
         chat_mode='context',
-        system_prompt=SYSTEM_PROMPT2,
+        system_prompt=SYSTEM_PROMPT,
         similarity_top_k=3,
         verbose=False
 
@@ -105,12 +111,17 @@ def process_query(query, model, temperature):
     init_llm(llm_model=model, llm_temperature=temperature)
     query_engine = init_retriever()
     llm_response = generate_response(query_engine, query)
-    llmresponse_logger.info(f'Query: {query} \nresponse: {llm_response}\n')
+    llmresponse_logger.info(f"Query: {query} \nresponse: {str(llm_response)}\n")
     return llm_response
 
 
 if __name__ == '__main__':
-    model = "gemma2-9b-it"
-    query = 'Tell me about Daniel Tobi'
-    temperature = 0.1
-    print(process_query(query=query, model=model, temperature=temperature))
+    parser = argparse.ArgumentParser(description="Process a query using a specified model.")
+    parser.add_argument("--model", type=str, required=True, help="The model to use.")
+    parser.add_argument("--query", type=str, required=True, help="The query to process")
+    parser.add_argument("--temperature", type=float, default=0.1, help="The model temperature for output experessiveness")
+    
+    args = parser.parse_args()
+    print(process_query(query=args.query, model=args.model, temperature=args.temperature))
+
+# python script_name.py --model "gemma2-9b-it" --query "Tell me about Daniel Tobi" --temperature 0.1
