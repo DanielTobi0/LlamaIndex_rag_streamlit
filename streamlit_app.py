@@ -1,20 +1,22 @@
 import streamlit as st
-import os, time, requests, shutil
+import os, time, requests, shutil, yaml
 from src.exceptions.operations_handler import userops_logger, llmresponse_logger, system_logger
+
+with open('src/config.yaml', 'r') as f:
+    config = yaml.safe_load(f)
 
 
 def delete_data_folder(folder_path, max_attempts=10, delay=2):
     """
-    a force attempt to delete chroma db of the previous document(s)
+    a forceful attempt to delete chroma db of the previous document(s)
     Args:
         folder_path(str): chroma db directory
         max_attempts(int): number of times to try the deletion
-        deplay(int): time interval to wait.
+        delay(int): time interval to wait.
     """
     for attempt in range(max_attempts):
         if os.path.exists(folder_path):
             try:
-                # Try to delete the folder
                 shutil.rmtree(folder_path)
                 print(f'Deleted folder on attempt {attempt + 1}')
                 return True
@@ -24,25 +26,21 @@ def delete_data_folder(folder_path, max_attempts=10, delay=2):
         else:
             print(f'Folder does not exist: {folder_path}')
             return True
-    
+
     print(f'Failed to delete folder after {max_attempts} attempts')
     return False
 
-dir = 'C:/Users/HomePC/Desktop/project_law/src/chroma_db'
 
 if 'delete_chroma' not in st.session_state:
-    if os.path.exists(dir):
-        # st.cache
-        delete_data_folder(dir)
+    if os.path.exists(config["chromadb_path_streamlit"]):
+        delete_data_folder(config["chromadb_path_streamlit"])
         time.sleep(3)
     st.session_state.delete_chroma = True
 
 
-# delete content in data dir
-DATA_UPLOAD_DIR = "data"
 def clear_data_folder(folder_path):
     """
-    clear the contents in data folder
+    clear the document(s) in data folder
     Args:
         folder_path(str): chroma db directory
     """
@@ -60,19 +58,18 @@ def clear_data_folder(folder_path):
 
 # clear data in data folder
 if 'data_cleared' not in st.session_state:
-    if not os.path.exists(DATA_UPLOAD_DIR):
-        os.makedirs(DATA_UPLOAD_DIR)
+    if not os.path.exists(config["DATA_UPLOAD_DIR_STREAMLIT"]):
+        os.makedirs(config["DATA_UPLOAD_DIR_STREAMLIT"])
     else:
-        clear_data_folder(DATA_UPLOAD_DIR)
+        clear_data_folder(config["DATA_UPLOAD_DIR_STREAMLIT"])
     st.session_state.data_cleared = True
 
 
-
-def save_uploaded_file(uploaded_file):
-    if uploaded_file is not None:
-        file_path = os.path.join(DATA_UPLOAD_DIR, uploaded_file.name)
+def save_uploaded_file(upload_file):
+    if upload_file is not None:
+        file_path = os.path.join(config["DATA_UPLOAD_DIR_STREAMLIT"], upload_file.name)
         with open(file_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
+            f.write(upload_file.getbuffer())
         return True
     return False
 
@@ -92,7 +89,7 @@ with st.sidebar:
             file_details = {
                 "Filename": uploaded_file.name,
                 "Filetype": uploaded_file.type,
-                "Filesize": uploaded_file.size
+                "File size": uploaded_file.size
             }
         if st.sidebar.button("Save All Files"):
             for uploaded_file in uploaded_files:

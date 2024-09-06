@@ -3,8 +3,8 @@ from fastapi.responses import JSONResponse
 from simple import process_query
 from exceptions.operations_handler import system_logger
 
-
 app = FastAPI()
+
 
 @app.post('/chat')
 async def generate_chat(request: Request):
@@ -21,11 +21,12 @@ async def generate_chat(request: Request):
         return JSONResponse(content={"status": "success", "response": llm_response}, status_code=200)
 
     except Exception as e:
-        system_logger.error(e)#traceback.format_exc())
+        system_logger.error(e)  # traceback.format_exc())
         raise HTTPException(status_code=400, detail=str(e))
 
 
 if __name__ == "__main__":
     import uvicorn
+
     print("Starting LLM API")
     uvicorn.run(app, host="0.0.0.0", reload=True)

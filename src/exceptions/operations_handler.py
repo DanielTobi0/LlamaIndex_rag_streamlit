@@ -1,5 +1,5 @@
 import logging, pathlib
-from pathlib import Path
+
 
 current_working_directory = pathlib.Path.cwd()
 
@@ -42,7 +42,7 @@ def create_folder_and_log_file(folder_name:str, file_name:str) -> pathlib.Path:
     log_file_path.touch()
 
 folder_name = 'logs'
-log_files_to_create = ['system.log', 'userops.log', 'llmresponse.log']
+log_files_to_create = ['system.log', 'userops.log', 'llmresponse.log', 'evals.log']
 for log_file in log_files_to_create:
     create_folder_and_log_file(folder_name=folder_name, file_name=log_file)
 
@@ -50,4 +50,4 @@ for log_file in log_files_to_create:
 system_logger = setup_logger(__name__, f'{current_working_directory}/logs/system.log') # system logger
 userops_logger = setup_logger("UserLogger", f'{current_working_directory}/logs/userops.log') # userops logger
 llmresponse_logger = setup_logger("LLMResponse", f'{current_working_directory}/logs/llmresponse.log') # llmresponse logger
-
+evalresponse_logger = setup_logger("EvalsReponse", f'{current_working_directory}/logs/evals.log', 1) # evaluation logger

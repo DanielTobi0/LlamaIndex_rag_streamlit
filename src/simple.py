@@ -1,6 +1,5 @@
-import os, time
-from exceptions.operations_handler import system_logger, llmresponse_logger, userops_logger
-import chromadb
+import os, time, asyncio, yaml, chromadb, argparse
+from exceptions.operations_handler import system_logger, llmresponse_logger, userops_logger, evalresponse_logger
 from llama_index.core import (
     SimpleDirectoryReader,
     VectorStoreIndex,
@@ -10,12 +9,13 @@ from llama_index.core import (
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.llms.groq import Groq
-import argparse
-from pathlib import Path
-import shutil
+from llama_index.core.memory import ChatMemoryBuffer
+from llama_index.core.evaluation import FaithfulnessEvaluator, RelevancyEvaluator, BatchEvalRunner
+from llama_index.core.llama_dataset.generator import RagDatasetGenerator
 
+with open('config.yaml', 'r') as f:
+    config = yaml.safe_load(f)
 
-# LLM settings
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 
@@ -28,51 +28,64 @@ def init_llm(llm_model: str, llm_temperature: float):
     return:
         None
     """
-    Settings.llm = Groq(llm_model, request_timeout=60.0, api_key=GROQ_API_KEY, temperature=llm_temperature)
+    Settings.llm = Groq(llm_model, request_timeout=config['request_timeout'], api_key=GROQ_API_KEY,
+                        temperature=llm_temperature)
     Settings.embed_model = HuggingFaceEmbedding(model_name='TaylorAI/bge-micro-v2')
     system_logger.info(f'Embedding and LLM model loaded')
 
 
 def init_retriever():
     """Embed documents and return a query engine for retrieval."""
-    chromadb_path = './chroma_db'
+    chromadb_path = config['chromadb_path']
     db = chromadb.PersistentClient(path=chromadb_path)
-    collection_name = 'quickstart'
+    collection_name = config['collection_name']
     chroma_collection = db.get_or_create_collection(collection_name)
 
     vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-    documents = SimpleDirectoryReader("../data").load_data()
-    Settings.chunk_size = 100
-    Settings.chunk_overlap = 30
+    documents = SimpleDirectoryReader(config["documents_path"]).load_data()
+    Settings.chunk_size = config['Settings.chunk_size']
+    Settings.chunk_overlap = config['Settings.chunk_overlap']
     system_logger.info(f'Document created with {len(documents)} chunk(s)')
 
-    
     SYSTEM_PROMPT = (
         "You are an AI assistant designed to help recruiters by answering questions based on a provided resume.\n\n"
         "The resume contains personal, educational, and professional details about a candidate. Use the information from the resume to answer questions accurately and concisely.\n"
         "If the question is outside the scope of the resume or requires subjective judgement, clarify this to the recruiter.\n"
         "Always ensure that your responses are relevant to the details provided in the resume.\n"
+        "You are to sound in a first person view, like a recuriter chatting with the interviewee\n"
         "Below is some context related to the resume:\n"
         "--------------------------------------------\n"
         "{context}\n"
         "--------------------------------------------\n"
         "Considering the above information, please respond to the following query from the recruiter.\n\n"
         "Question: {query_str}\n\n"
-
     )
+    SYSTEM_PROMPT = """
+    You are an AI assistant designed to support recruiters by providing answers based on the candidate's resume.
+
+    The resume contains personal, educational, and professional details. Use this information to answer questions clearly and concisely. If a question extends beyond the resume's scope or requires subjective judgement, inform the recruiter accordingly.
+    
+    Ensure all responses are directly relevant to the details within the resume, and always maintain a conversational tone, as if you're a recruiter engaging with the candidate.
+    
+    Below is the context from the resume:
+    {context}
+    Based on the provided details, please respond to the following query from the recruiter:
+    
+    Question: {query_str}
+    """
     index = VectorStoreIndex.from_documents(documents, storage_context=storage_context)
+    memory = ChatMemoryBuffer.from_defaults(token_limit=config['token_limit'])
     chat_engine = index.as_chat_engine(
-        chat_mode='context',
+        chat_mode=config['chat_mode'],
         system_prompt=SYSTEM_PROMPT,
-        similarity_top_k=3,
-        verbose=False
-
+        similarity_top_k=config['similarity_top_k'],
+        verbose=False,
+        memory=memory
     )
-    # https://docs.llamaindex.ai/en/v0.10.17/api_reference/query/query_engines/retriever_query_engine.html
     system_logger.info('Query engine and index created\n\n')
-    return chat_engine
+    return chat_engine, index
 
 
 def generate_response(query_engine, user_query: str):
@@ -97,8 +110,17 @@ models = [
 
 
 def generate(query, model, temperature):
+    """
+    This function combines the work of the earlier function.
+    initialize embedding and model, convert the docs to embeddings, 
+    and generate results, which is written to the llmsresponse log file.
+    Args:
+        query(str): user query
+        model(str): chat model to use
+        temperature(float): model temperature
+    """
     init_llm(llm_model=model, llm_temperature=temperature)
-    query_engine = init_retriever()
+    query_engine, index = init_retriever()
     llm_response = generate_response(query_engine, query)
     llmresponse_logger.info(f'Query: {query} \nresponse: {llm_response}\n')
 
@@ -107,9 +129,71 @@ def generate(query, model, temperature):
         time.sleep(0.05)
 
 
+def evaluating_llm_response(vector_index, query):
+    """
+    Evaluating LLM response, based on faithfulness and relevancy.
+    """
+    llm = Groq(model=config['llm_model'], request_timeout=config['request_timeout'], api_key=GROQ_API_KEY,
+               temperature=0.0)
+    faithfulness_evaluator = FaithfulnessEvaluator(llm)
+    query_engine = vector_index.as_query_engine()
+    response = query_engine.query(query)
+    faithfulness_result = faithfulness_evaluator.evaluate_response(response=response)
+
+    relevancy_evaluator = RelevancyEvaluator(llm)
+    response_relevancy = query_engine.query(query)
+    result_relevancy = relevancy_evaluator.evaluate_response(query, response_relevancy)
+    evalresponse_logger.info(
+        f"-----Query: {query}-----Evaluation match: {str(faithfulness_result.passing)}-----\n-----Query: {query}-----Evaluating Query + Response Relevancy: {result_relevancy}\n\n")
+
+
+def batch_evaluation():
+    llm = Groq(model=config['llm_model'], request_timeout=60.0, api_key=GROQ_API_KEY, temperature=0.0)
+    documents = SimpleDirectoryReader(config['documents_path']).load_data()
+    index = VectorStoreIndex.from_documents(documents)
+
+    dataset_generator = RagDatasetGenerator.from_documents(
+        documents=documents,
+        num_questions_per_chunk=2
+    )
+    rag_dataset = dataset_generator.generate_dataset_from_nodes()
+    questions = [e.query for e in rag_dataset.examples]
+
+    # model, faith and relevancy.
+    faithfulness_evaluator = FaithfulnessEvaluator(llm)
+    relevancy_evaluator = RelevancyEvaluator(llm)
+
+    runner = BatchEvalRunner(
+        {
+            'faithfulness': faithfulness_evaluator,
+            'relevancy': relevancy_evaluator
+        },
+        workers=3,
+    )
+
+    return runner, questions, index
+
+
+async def run_with_delay(runner, vector_index, questions, delay):
+    results = []
+    for question in questions:
+        result = await runner.aevaluate_queries(
+            vector_index.as_query_engine(), queries=[question]
+        )
+        results.append(result)
+        await asyncio.sleep(delay)
+    return results
+
+
+# runner, questions, index = batch_evaluation()
+# result = asyncio.run(run_with_delay(runner=runner, vector_index=index, questions=questions, delay_seconds=60))
+# llmresponse_logger.info(result)
+
+
 def process_query(query, model, temperature):
     init_llm(llm_model=model, llm_temperature=temperature)
-    query_engine = init_retriever()
+    query_engine, index = init_retriever()
+    # evaluating_llm_response(index, query)
     llm_response = generate_response(query_engine, query)
     llmresponse_logger.info(f"Query: {query} \nresponse: {str(llm_response)}\n")
     return llm_response
@@ -119,9 +203,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Process a query using a specified model.")
     parser.add_argument("--model", type=str, required=True, help="The model to use.")
     parser.add_argument("--query", type=str, required=True, help="The query to process")
-    parser.add_argument("--temperature", type=float, default=0.1, help="The model temperature for output experessiveness")
-    
-    args = parser.parse_args()
-    print(process_query(query=args.query, model=args.model, temperature=args.temperature))
+    parser.add_argument("--temperature", type=float, default=0.1,
+                        help="The model temperature for output expressiveness")
 
-# python script_name.py --model "gemma2-9b-it" --query "Tell me about Daniel Tobi" --temperature 0.1
+    args = parser.parse_args()
+    process_query(query=args.query, model=args.model, temperature=args.temperature)
+# python simple.py --model "gemma2-9b-it" --query "Tell me about Daniel Tobi" --temperature 0.1

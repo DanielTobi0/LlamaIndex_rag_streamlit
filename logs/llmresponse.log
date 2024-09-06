@@ -1,272 +1,40 @@
-2024-09-05 09:15:05,038 - LLMResponse - INFO - Hello world
-2024-09-05 11:57:27,138 - LLMResponse - INFO - Groq response: Based on the provided text, a key limitation of AI mentioned is its difficulty in understanding context, particularly sarcasm and humor. 
+2024-09-06 10:41:07,328 - LLMResponse - INFO - Groq response: Daniel Tobi is a student at Oyo University, pursuing a degree in Computer Science, which is expected to be completed in March 2024. He has a strong interest in data science and artificial intelligence, as evidenced by his involvement in the Data Community Africa and his work with various AI tools and platforms. 
 
-For example, AI might misinterpret sarcastic or humorous language, leading to inappropriate or irrelevant responses. 
-
-2024-09-05 11:57:27,138 - LLMResponse - INFO - Groq response: Based on the provided text, a key limitation of AI mentioned is its difficulty in understanding context, particularly sarcasm and humor. 
-
-For example, AI might misinterpret sarcastic or humorous language, leading to inappropriate or irrelevant responses. 
-
-2024-09-05 11:58:35,962 - LLMResponse - INFO - Groq response: Please provide me with the specific query from the recruiter. I need the actual question to be able to answer it based on the resume context. 
-
-2024-09-05 11:58:35,962 - LLMResponse - INFO - Groq response: Please provide me with the specific query from the recruiter. I need the actual question to be able to answer it based on the resume context. 
-
-2024-09-05 11:58:35,962 - LLMResponse - INFO - Groq response: Please provide me with the specific query from the recruiter. I need the actual question to be able to answer it based on the resume context. 
-
-2024-09-05 11:59:57,582 - LLMResponse - INFO - Groq response: Daniel Tobi is a computer science student at Oyo University, expected to graduate in March 2024. He has experience in areas like customer churn modeling, sentiment analysis, and named entity recognition. 
-
-He is also familiar with generative AI and LLMs, including tools like LangChain, RAG, OpenAI, and LlamaIndex.  Daniel has experience with Vector DBs and data analysis and visualization using Seaborn. 
-
-He is an active member of the Data Community Africa. You can find his portfolio on GitHub, LinkedIn, and Twitter. 
-
-2024-09-05 11:59:57,582 - LLMResponse - INFO - Groq response: Daniel Tobi is a computer science student at Oyo University, expected to graduate in March 2024. He has experience in areas like customer churn modeling, sentiment analysis, and named entity recognition. 
-
-He is also familiar with generative AI and LLMs, including tools like LangChain, RAG, OpenAI, and LlamaIndex.  Daniel has experience with Vector DBs and data analysis and visualization using Seaborn. 
-
-He is an active member of the Data Community Africa. You can find his portfolio on GitHub, LinkedIn, and Twitter. 
-
-2024-09-05 11:59:57,582 - LLMResponse - INFO - Groq response: Daniel Tobi is a computer science student at Oyo University, expected to graduate in March 2024. He has experience in areas like customer churn modeling, sentiment analysis, and named entity recognition. 
-
-He is also familiar with generative AI and LLMs, including tools like LangChain, RAG, OpenAI, and LlamaIndex.  Daniel has experience with Vector DBs and data analysis and visualization using Seaborn. 
-
-He is an active member of the Data Community Africa. You can find his portfolio on GitHub, LinkedIn, and Twitter. 
-
-2024-09-05 12:01:06,490 - LLMResponse - INFO - Groq response: Daniel lives in Lagos, Nigeria. 
-
-2024-09-05 12:01:06,490 - LLMResponse - INFO - Groq response: Daniel lives in Lagos, Nigeria. 
-
-2024-09-05 12:01:06,490 - LLMResponse - INFO - Groq response: Daniel lives in Lagos, Nigeria. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:11:22,682 - LLMResponse - INFO - Groq response: Daniel Tobi is a customer churn modeling expert with experience in data analysis and machine learning.  He is proficient in Python and R, and has a strong understanding of statistical modeling techniques. 
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 12:20:35,614 - LLMResponse - INFO - Groq response: Daniel Tobi is a Customer Churn Modeling specialist based in Lagos, Nigeria. You can reach him at +2348106542743 or Adejumobidaniel563@gmail.com.  
-
-2024-09-05 13:33:08,112 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a computer science student at Oyo University, expected to graduate in March 2024. 
-
-He is interested in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. He also has experience with Generative AI and LLMs, particularly tools like LangChain, RAG, OpenAI, and LlamaIndex. 
-
-Daniel is proficient in data analysis and visualization using Seaborn and has experience working with Vector DBs. 
-
-He is an active member of the Data Community Africa and shares his work on platforms like Github, LinkedIn, and Twitter. 
-
-2024-09-05 13:33:08,112 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a computer science student at Oyo University, expected to graduate in March 2024. 
-
-He is interested in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. He also has experience with Generative AI and LLMs, particularly tools like LangChain, RAG, OpenAI, and LlamaIndex. 
-
-Daniel is proficient in data analysis and visualization using Seaborn and has experience working with Vector DBs. 
-
-He is an active member of the Data Community Africa and shares his work on platforms like Github, LinkedIn, and Twitter. 
-
-2024-09-05 13:43:58,944 - LLMResponse - INFO - Groq response: Daniel Tobi is a computer science student at Oyo University, expected to graduate in 03/2024.  
-
-He is interested in fields like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-Daniel has experience with Generative AI and LLMs, including tools like LangChain, RAG, OpenAI, and LlamaIndex. He is also familiar with Vector DB for data analysis and visualization using Seaborn. 
+He's familiar with  Sentiment Analysis, Named Entity Recognition, and has experience with Generative AI & LLMs like LangChain, RAG, OpenAI, and LlamaIndex.  He's also comfortable using Vector DB for tools and platforms, and  Seaborn for data analysis and visualization.
 
 You can find more about his work on his Github, Linkedin, and Twitter profiles. 
 
-2024-09-05 13:44:10,999 - LLMResponse - INFO - Groq response: According to the resume, Adejumobi Daniel Tobi is from Lagos, Nigeria. 
+2024-09-06 10:41:07,328 - LLMResponse - INFO - Groq response: Daniel Tobi is a student at Oyo University, pursuing a degree in Computer Science, which is expected to be completed in March 2024. He has a strong interest in data science and artificial intelligence, as evidenced by his involvement in the Data Community Africa and his work with various AI tools and platforms. 
 
-2024-09-05 13:44:10,999 - LLMResponse - INFO - Groq response: According to the resume, Adejumobi Daniel Tobi is from Lagos, Nigeria. 
+He's familiar with  Sentiment Analysis, Named Entity Recognition, and has experience with Generative AI & LLMs like LangChain, RAG, OpenAI, and LlamaIndex.  He's also comfortable using Vector DB for tools and platforms, and  Seaborn for data analysis and visualization.
 
-2024-09-05 13:45:18,133 - LLMResponse - INFO - Groq response: Based on the provided text, a key limitation of AI is its difficulty understanding context, particularly sarcasm and humor. 
+You can find more about his work on his Github, Linkedin, and Twitter profiles. 
 
-For example, the text states that AI might misinterpret sarcastic or humorous messages, leading to inappropriate or irrelevant responses. 
+2024-09-06 10:41:18,949 - LLMResponse - INFO - Groq response: According to his resume, Daniel lives in Lagos, Nigeria. 
 
-2024-09-05 13:45:18,133 - LLMResponse - INFO - Groq response: Based on the provided text, a key limitation of AI is its difficulty understanding context, particularly sarcasm and humor. 
+2024-09-06 10:41:18,949 - LLMResponse - INFO - Groq response: According to his resume, Daniel lives in Lagos, Nigeria. 
 
-For example, the text states that AI might misinterpret sarcastic or humorous messages, leading to inappropriate or irrelevant responses. 
+2024-09-06 10:41:40,740 - LLMResponse - INFO - Groq response: Based on the resume provided, I can confirm Adejumobi Daniel Tobi's email address is Adejumobidaniel563@gmail.com and his phone number is +2348106542743.  
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
+Is there anything else I can help you with regarding his information?  
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
+2024-09-06 10:41:40,740 - LLMResponse - INFO - Groq response: Based on the resume provided, I can confirm Adejumobi Daniel Tobi's email address is Adejumobidaniel563@gmail.com and his phone number is +2348106542743.  
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
+Is there anything else I can help you with regarding his information?  
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
+2024-09-06 10:43:48,795 - LLMResponse - INFO - Groq response: According to the text provided, acoustic modeling is divided into two parts: 
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
+1. Designing a feature representation of the audio data, and 
+2. Building a suitable predictive model based on the representation. 
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
+2024-09-06 10:43:48,795 - LLMResponse - INFO - Groq response: According to the text provided, acoustic modeling is divided into two parts: 
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
+1. Designing a feature representation of the audio data, and 
+2. Building a suitable predictive model based on the representation. 
 
-2024-09-05 14:06:27,077 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer your question.  I need the information from the resume to give you an accurate and relevant response. 
 
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
+2024-09-06 10:44:05,745 - LLMResponse - INFO - Groq response: Please provide me with the question the recruiter asked. I need the context of the question to determine if I can answer it based on the resume information.  
 
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
-
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
-
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
-
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
-
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
-
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
-
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
-
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:06:57,390 - LLMResponse - INFO - Groq response: Please provide me with the content of Daniel Tobi's resume so I can answer the recruiter's question. 
-
-I need the information from the resume to give you an accurate and relevant response. 
-
-2024-09-05 14:13:40,358 - LLMResponse - INFO - Groq response: Daniel Tobi is a computer science student at Oyo University, expected to graduate in 03/2024. 
-
-He has experience with:
-
-* **Data Analysis & Visualization:** Seaborn
-* **Natural Language Processing (NLP):** Sentiment Analysis, Named Entity Recognition
-* **Generative AI & LLMs:** LangChain, RAG, OpenAI, LlamaIndex
-* **Vector Databases**
-
-Daniel is also active in the data community, volunteering with Data Community Africa since April 2022. 
-
-You can find his portfolio on Github, LinkedIn, and Twitter. 
-
-2024-09-05 14:17:34,652 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a data scientist with experience in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-He is familiar with Generative AI and LLMs, specifically tools like LangChain, RAG, and OpenAI, as well as LlamaIndex. 
-
-Daniel also has experience with Vector DB and data analysis and visualization using Seaborn. 
-
-2024-09-05 14:17:34,652 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a data scientist with experience in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-He is familiar with Generative AI and LLMs, specifically tools like LangChain, RAG, and OpenAI, as well as LlamaIndex. 
-
-Daniel also has experience with Vector DB and data analysis and visualization using Seaborn. 
-
-2024-09-05 14:17:34,652 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a data scientist with experience in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-He is familiar with Generative AI and LLMs, specifically tools like LangChain, RAG, and OpenAI, as well as LlamaIndex. 
-
-Daniel also has experience with Vector DB and data analysis and visualization using Seaborn. 
-
-2024-09-05 14:17:34,652 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a data scientist with experience in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-He is familiar with Generative AI and LLMs, specifically tools like LangChain, RAG, and OpenAI, as well as LlamaIndex. 
-
-Daniel also has experience with Vector DB and data analysis and visualization using Seaborn. 
-
-2024-09-05 14:17:34,652 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a data scientist with experience in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-He is familiar with Generative AI and LLMs, specifically tools like LangChain, RAG, and OpenAI, as well as LlamaIndex. 
-
-Daniel also has experience with Vector DB and data analysis and visualization using Seaborn. 
-
-2024-09-05 14:17:34,652 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a data scientist with experience in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-He is familiar with Generative AI and LLMs, specifically tools like LangChain, RAG, and OpenAI, as well as LlamaIndex. 
-
-Daniel also has experience with Vector DB and data analysis and visualization using Seaborn. 
-
-2024-09-05 14:17:34,652 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a data scientist with experience in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-He is familiar with Generative AI and LLMs, specifically tools like LangChain, RAG, and OpenAI, as well as LlamaIndex. 
-
-Daniel also has experience with Vector DB and data analysis and visualization using Seaborn. 
-
-2024-09-05 14:17:34,652 - LLMResponse - INFO - Groq response: Daniel Adejumobi is a data scientist with experience in areas like Customer Churn Modeling, Sentiment Analysis, and Named Entity Recognition. 
-
-He is familiar with Generative AI and LLMs, specifically tools like LangChain, RAG, and OpenAI, as well as LlamaIndex. 
-
-Daniel also has experience with Vector DB and data analysis and visualization using Seaborn. 
+2024-09-06 10:44:05,745 - LLMResponse - INFO - Groq response: Please provide me with the question the recruiter asked. I need the context of the question to determine if I can answer it based on the resume information.  
 
