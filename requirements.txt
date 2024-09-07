@@ -8,4 +8,3 @@ ragas==0.1.16
 requests==2.32.3
 streamlit==1.38.0
 uvicorn==0.30.6
-pyymal
