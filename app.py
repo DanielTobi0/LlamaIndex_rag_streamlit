@@ -2,8 +2,19 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 from simple import process_query
 from exceptions.operations_handler import system_logger
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8501"],  # Allow requests from Streamlit
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 @app.post('/chat')
@@ -24,9 +35,13 @@ async def generate_chat(request: Request):
         system_logger.error(e)  # traceback.format_exc())
         raise HTTPException(status_code=400, detail=str(e))
 
+@app.get("/")
+async def root():
+    return {"message": "FastAPI is running"}
 
-if __name__ == "__main__":
+'''if __name__ == "__main__":
     import uvicorn
 
     print("Starting LLM API")
     uvicorn.run(app, host="0.0.0.0", reload=True)
+'''

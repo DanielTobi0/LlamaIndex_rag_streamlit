@@ -2,13 +2,13 @@ llm_model: "gemma2-9b-it"
 request_timeout: 60.0
 temperature: 0.1
 embed_model: "TaylorAI/bge-micro-v2"
-chromadb_path: "src/chroma_db"
+chromadb_path: "chroma_db"
 collection_name: "quickstart"
-documents_path: "../data"
+documents_path: "data"
 Settings.chunk_size: 100
 Settings.chunk_overlap: 30
 token_limit: 1500
 chat_mode: 'context'
 similarity_top_k: 5
-chromadb_path_streamlit: "C:/Users/HomePC/Desktop/project_law/src/chroma_db'"
+chromadb_path_streamlit: "chroma_db_eval'"
 DATA_UPLOAD_DIR_STREAMLIT: "data"

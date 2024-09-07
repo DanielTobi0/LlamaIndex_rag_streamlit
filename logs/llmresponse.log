@@ -38,3 +38,37 @@ Is there anything else I can help you with regarding his information?
 
 2024-09-06 10:44:05,745 - LLMResponse - INFO - Groq response: Please provide me with the question the recruiter asked. I need the context of the question to determine if I can answer it based on the resume information.  
 
+2024-09-07 14:34:38,932 - LLMResponse - INFO - Query: Tell me about Daniel Tobi 
+response: Daniel Tobi is a Computer Science student at Oyo, graduating in March 2024. He's passionate about NLP and has a strong background in it, even achieving top-ranking performance in some projects. 
+
+He's familiar with various NLP techniques like text classification, sentiment analysis, and named entity recognition.  Daniel also has experience with generative AI and LLMs, using tools like LangChain, RAG, OpenAI, and LlamaIndex.  
+
+He's active in the data community, particularly Data Community Africa, and you can find his work on platforms like Github, LinkedIn, and Twitter. 
+
+
+
+
+
+2024-09-07 14:34:38,932 - LLMResponse - INFO - Query: Tell me about Daniel Tobi 
+response: Daniel Tobi is a Computer Science student at Oyo, graduating in March 2024. He's passionate about NLP and has a strong background in it, even achieving top-ranking performance in some projects. 
+
+He's familiar with various NLP techniques like text classification, sentiment analysis, and named entity recognition.  Daniel also has experience with generative AI and LLMs, using tools like LangChain, RAG, OpenAI, and LlamaIndex.  
+
+He's active in the data community, particularly Data Community Africa, and you can find his work on platforms like Github, LinkedIn, and Twitter. 
+
+
+
+
+
+2024-09-07 14:34:47,522 - LLMResponse - INFO - Query: Tell me about Daniel Tobi 
+response: Daniel Tobi is a computer science student at Oyo University, graduating in March 2024. He's passionate about data science and has experience with various tools and technologies like Seaborn for data visualization, and LangChain, RAG, and LlamaIndex for working with generative AI and LLMs.  
+
+He's also involved in the Data Community Africa and seems to be active on platforms like Github, LinkedIn, and Twitter.  
+
+
+2024-09-07 14:34:47,522 - LLMResponse - INFO - Query: Tell me about Daniel Tobi 
+response: Daniel Tobi is a computer science student at Oyo University, graduating in March 2024. He's passionate about data science and has experience with various tools and technologies like Seaborn for data visualization, and LangChain, RAG, and LlamaIndex for working with generative AI and LLMs.  
+
+He's also involved in the Data Community Africa and seems to be active on platforms like Github, LinkedIn, and Twitter.  
+
+

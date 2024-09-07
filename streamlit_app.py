@@ -1,6 +1,6 @@
 import streamlit as st
 import os, time, requests, shutil, yaml
-from src.exceptions.operations_handler import userops_logger, llmresponse_logger, system_logger
+from exceptions.operations_handler import userops_logger, llmresponse_logger, system_logger
 
 with open('src/config.yaml', 'r') as f:
     config = yaml.safe_load(f)
