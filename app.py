@@ -1,11 +1,9 @@
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 from simple import process_query
-from exceptions.operations_handler import system_logger
-
+import uvicorn
 
 app = FastAPI()
-
 
 @app.post('/chat')
 async def generate_chat(request: Request):
@@ -22,13 +20,9 @@ async def generate_chat(request: Request):
         return JSONResponse(content={"status": "success", "response": llm_response}, status_code=200)
 
     except Exception as e:
-        # system_logger.error(e)  # traceback.format_exc())
         raise HTTPException(status_code=400, detail=str(e))
 
 
 if __name__ == "__main__":
-    import uvicorn
-
-    print("Starting LLM API")
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
