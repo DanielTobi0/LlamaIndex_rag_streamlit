@@ -34,7 +34,6 @@ def init_llm(llm_model: str, llm_temperature: float):
     Settings.llm = Groq(llm_model, request_timeout=config['request_timeout'], api_key=GROQ_API_KEY,
                         temperature=llm_temperature)
     Settings.embed_model = HuggingFaceEmbedding(config['embed_model'])
-    # system_logger.info("Embedding and LLM model loaded")
 
 
 def init_retriever():
@@ -50,8 +49,8 @@ def init_retriever():
     documents = SimpleDirectoryReader(config["documents_path"]).load_data()
     Settings.chunk_size = config['Settings_chunk_size']
     Settings.chunk_overlap = config['Settings_chunk_overlap']
-    # system_logger.info(f'Document created with {len(documents)} chunk(s)')
 
+    
     SYSTEM_PROMPT = (
         "You are an AI assistant designed to help recruiters by answering questions based on a provided resume.\n\n"
         "The resume contains personal, educational, and professional details about a candidate. Use the information from the resume to answer questions accurately and concisely.\n"
@@ -87,7 +86,6 @@ def init_retriever():
         verbose=False,
         memory=memory
     )
-    # system_logger.info('Query engine and index created\n\n')
     return chat_engine, index
 
 
@@ -100,7 +98,6 @@ def generate_response(query_engine, user_query: str):
         return response (str): user response
     """
     response = query_engine.chat(user_query)
-    # llmresponse_logger.info(f'Query: {user_query} \nresponse: {response}\n')
     return response.response
 
 
@@ -120,7 +117,6 @@ def evaluating_llm_response(vector_index, query):
     result_relevancy = relevancy_evaluator.evaluate_response(query, response_relevancy)
     evalresponse_logger.info(
         f"-----Query: {query}-----Evaluation match: {str(faithfulness_result.passing)}-----\n-----Query: {query}-----Evaluating Query + Response Relevancy: {result_relevancy}\n\n")
-    print('done4--')
 
 
 def batch_evaluation():
@@ -195,8 +191,6 @@ def process_query(query, model, temperature):
 
 
 if __name__ == '__main__':
-    with open('config.yaml', 'r') as f:
-        config = yaml.safe_load(f)
     models = [
     "llama-3.1-70b-versatile",
     "llama-3.1-8b-instant",
