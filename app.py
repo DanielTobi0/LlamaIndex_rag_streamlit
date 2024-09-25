@@ -2,19 +2,10 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 from simple import process_query
 from exceptions.operations_handler import system_logger
-from fastapi.middleware.cors import CORSMiddleware
 
 
 app = FastAPI()
 
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["https://*.streamlit.app", "http://localhost:8502"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 @app.post('/chat')
 async def generate_chat(request: Request):
