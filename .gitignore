@@ -6,3 +6,5 @@ logs/
 .idea/
 chroma_db/
 check.py
+exceptions/
+simple.py

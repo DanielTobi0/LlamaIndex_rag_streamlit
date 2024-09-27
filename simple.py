@@ -1,4 +1,4 @@
-import os, time, asyncio, yaml, chromadb, argparse
+'''import os, time, asyncio, yaml, chromadb, argparse
 from dotenv import load_dotenv
 from exceptions.operations_handler import system_logger, llmresponse_logger, userops_logger, evalresponse_logger
 from llama_index.core import (
@@ -206,3 +206,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     process_query(query=args.query, model=args.model, temperature=args.temperature)
 # python simple.py --model "gemma2-9b-it" --query "Tell me about Daniel Tobi" --temperature 0.1
+'''
