@@ -190,7 +190,7 @@ def process_query(query, model, temperature):
     return llm_response
 
 
-if __name__ == '__main__':
+'''if __name__ == '__main__':
     models = [
     "llama-3.1-70b-versatile",
     "llama-3.1-8b-instant",
@@ -204,5 +204,5 @@ if __name__ == '__main__':
                         help="The model temperature for output expressiveness")
 
     args = parser.parse_args()
-    process_query(query=args.query, model=args.model, temperature=args.temperature)
+    process_query(query=args.query, model=args.model, temperature=args.temperature)'''
 # python simple.py --model "gemma2-9b-it" --query "Tell me about Daniel Tobi" --temperature 0.1
