@@ -15,6 +15,7 @@ typing_extensions==4.12.2
 tzdata==2024.1
 wcwidth==0.2.13
 wget==3.2
+
 ﻿chromadb==0.5.5
 fastapi==0.112.2
 llama-index==0.11.1
