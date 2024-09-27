@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 from simple import process_query
 import uvicorn
+import os
 
 app = FastAPI()
 
