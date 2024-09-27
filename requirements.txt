@@ -15,3 +15,13 @@ typing_extensions==4.12.2
 tzdata==2024.1
 wcwidth==0.2.13
 wget==3.2
+﻿chromadb==0.5.5
+fastapi==0.112.2
+llama-index==0.11.1
+llama-index-embeddings-huggingface==0.3.1
+llama-index-llms-groq==0.2.0
+llama-index-readers-file==0.2.0
+ragas==0.1.16
+requests==2.32.3
+streamlit==1.38.0
+uvicorn==0.30.6
